@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+ name: deploy-nginx
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: wordpress
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources: 
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+         - mountPath: "/usr/share/nginx/html"
+           name: pv-volume-nginx
+      volumes:
+        - name: pv-volume-nginx
+          persistentVolumeClaim:
+           claimName: pvc-volume-nginx

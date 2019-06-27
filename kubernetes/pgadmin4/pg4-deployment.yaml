@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: pgadmin4
+spec:
+  selector:
+    matchLabels:
+      run: pgadmin
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: pgadmin4
+    spec:
+      containers:
+      - name: pgadmin4
+        image: dpage/pgadmin4
+        #        ports:
+        #- containerPort: 80

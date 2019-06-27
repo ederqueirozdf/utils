@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nginx
+  labels:
+    app: nginx
+    tier: wordpress
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: nginx
+    tier: wordpress
+  externalIPs:
+  - 192.168.99.100
+
