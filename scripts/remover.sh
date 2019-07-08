@@ -25,8 +25,8 @@ dell_user()
 		for CPF in $LIST; do
 				
 				# Search CN for Users
-				DN=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep dn: | awk '{print $2}' )
-				NAME=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
+				DN=$( ldapsearch -xLLL -b "BASELDAP" -s sub cn=$CPF | grep dn: | awk '{print $2}' )
+				NAME=$( ldapsearch -xLLL -b "BASELDAP" -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
 				
 			if [ ! -z "$DN" ]; then
 
@@ -38,7 +38,7 @@ dell_user()
 				echo " "
 
 				# Dell user LDAP
-				ldapdelete -v -x -D "cn=master,o=mma" -w "$PASS" "$DN"
+				ldapdelete -v -x -D "cn=master,BASELDAP" -w "$PASS" "$DN"
 				echo " "
 				echo "Fim!";
 
