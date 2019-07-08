@@ -1215,11 +1215,11 @@ esac
 #Acrescimo feito pelo DBA Andre em 02_09_11
 
 
-  rm -f /u05/oracle/backup/MMAPRD1/adump/*
-  rm -f /u05/oracle/backup/MMAPRD1/archive/*
-  rm -f /u05/oracle/backup/MMAPRD1/bdump/*
-  rm -f /u05/oracle/backup/MMAPRD1/dpdump/*
-  rm -f /u05/oracle/backup/MMAPRD1/export/*
-  #rm -f /u05/oracle/backup/MMAPRD1/sql/${operation}*
-  rm -f /u05/oracle/backup/MMAPRD1/udump/*
+  rm -f /u05/oracle/backup/DIRETORIO/adump/*
+  rm -f /u05/oracle/backup/DIRETORIO/archive/*
+  rm -f /u05/oracle/backup/DIRETORIO/bdump/*
+  rm -f /u05/oracle/backup/DIRETORIO/dpdump/*
+  rm -f /u05/oracle/backup/DIRETORIO/export/*
+  #rm -f /u05/oracle/backup/DIRETORIO/sql/${operation}*
+  rm -f /u05/oracle/backup/DIRETORIO/udump/*
 
