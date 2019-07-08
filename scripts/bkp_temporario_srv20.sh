@@ -1,4 +1,4 @@
-#export ORACLE_SID=MMADSV
+#export ORACLE_SID=BANCODSV
 export ORACLE_BASE=/u01/oracle
 export ORACLE_HOME=${ORACLE_BASE}/product/10g
 export LD_LIBRARY_PATH=${ORACLE_HOME}/lib
@@ -17,7 +17,7 @@ export LOGEXP=${PATHBKP}/backup_full_datapump-${DIA}-exp
 export DEST_REMOTO=seu_servidor_remoto_de_backup
 
 orausr=system
-orapwd=mmaoracle
+orapwd=DSVoracle
 
 backup_logico_pump() {
   echo ""                                        >> $LOG
