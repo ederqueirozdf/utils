@@ -49,8 +49,8 @@ dell_user()
 				
 				echo "::Buscando usuarios::"
 				# Busca CN usuario LDAP
-				DN=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep dn: | awk '{print $2}' )
-				NAME=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
+				DN=$( ldapsearch -xLLL -b "BASELDAPAQUI" -s sub cn=$CPF | grep dn: | awk '{print $2}' )
+				NAME=$( ldapsearch -xLLL -b "BASELDAPAQUI" -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
 				
 			if [ ! -z "$DN" ]; then
 
