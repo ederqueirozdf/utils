@@ -1,11 +1,9 @@
 #!/bin/bash
 #
-# Script Hepta - MMA
-# Powered by Eder Queiroz
-# Script para busca e remocao de usuarios no ldap do ministerio do meio ambiente.
+
 
 LIST=$( cat usuarios.txt )
-PASS='&Mm@000%'
+PASS='SENHAQUI'
 BACKUPDIR=/opt/script/backup
 LDAPBKP=ldap-$(date +%Y-%m-%d).ldif
 LDAPBKPCONFIG=ldap-config-$(date +%Y-%m-%d).ldif
@@ -29,7 +27,7 @@ backup_ldap()
 	echo " :: Realizando Backup da Base LDAP/Sincroniza ::"
 	sleep 3
 	echo ""
-        /usr/sbin/slapcat -v -b "o=mma" -l $BACKUPDIR/$LDAPBKP >> $LOG
+        /usr/sbin/slapcat -v -b "BASELDAP" -l $BACKUPDIR/$LDAPBKP >> $LOG
         echo "" >> $LOG
 	echo "Efetuando backup slapcat CONFIG" >> $LOG
 	echo " :: Realizando Backup Config ::"
@@ -54,8 +52,8 @@ dell_user()
 				echo "::Buscando usuarios::" >> $LOG
 				echo " :: Buscando usuario :: "
 				# Busca CN usuario LDAP
-				DN=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep dn: | awk '{print $2}' )
-				NAME=$( ldapsearch -xLLL -b o=mma -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
+				DN=$( ldapsearch -xLLL -b "BASELDAP" -s sub cn=$CPF | grep dn: | awk '{print $2}' )
+				NAME=$( ldapsearch -xLLL -b "BASELDAP" -s sub cn=$CPF | grep fullName: | awk '{print $2}' )
 				
 			if [ ! -z "$DN" ]; then
 
@@ -70,7 +68,7 @@ dell_user()
 				echo " " >> $LOG
 
 				# Deleta usuario LDAP
-				ldapdelete -v -x -D "cn=master,o=mma" -w "$PASS" "$DN"
+				ldapdelete -v -x -D "cn=master,DNBASELDAP" -w "$PASS" "$DN"
 				echo " " >> $LOG
 				echo "Fim!";
 
