@@ -1,8 +1,4 @@
 #!/bin/bash
-#
-# Script Hepta - MMA
-# Powered by Eder Queiroz
-# Script para busca e remocao de usuarios no ldap
 
 LIST=$( cat usuarios.txt )
 PASS='Senha'
@@ -36,7 +32,7 @@ backup_ldap()
         echo "" >> $LOG
         echo "Efetuando backup slapcat" >> $LOG
 	echo "Realizando backup da base LDAP sincroniza"
-        /usr/sbin/slapcat -v -b "o=mma" -l $BACKUPDIR/$LDAPBKP >> $LOG
+        /usr/sbin/slapcat -v -b "NOMEBASELDAP" -l $BACKUPDIR/$LDAPBKP >> $LOG
 	echo "" >> $LOG
 
 }
@@ -67,7 +63,7 @@ dell_user()
 				echo " "
 
 				# Deleta usuario LDAP
-				ldapdelete -v -x -D "cn=master,o=mma" -w "$PASS" "$DN"
+				ldapdelete -v -x -D "cn=master,DNBASELDAP" -w "$PASS" "$DN"
 				echo " "
 				echo "Fim!";
 
