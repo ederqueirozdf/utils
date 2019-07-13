@@ -39,4 +39,16 @@
         kubectl create configmap language --from-literal=LANGUAGE=Spanish -o yaml --dry-run | replace -f -
 
 
+## Decrypt Secrets
 
+        kubectl get secrets
+        
+NAME TYPE DATA AGE
+mysecret Opaque 2 6m48s
+
+        kubectl get secret mysecret -o yaml
+
+password: ZWRlcjEyMwo=
+        
+        echo 'ZWRlcjEyMwo=' | base64 --decode
+        eder123
