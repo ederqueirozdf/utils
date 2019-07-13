@@ -43,8 +43,8 @@
 
         kubectl get secrets
         
-NAME TYPE DATA AGE
-mysecret Opaque 2 6m48s
+        NAME TYPE DATA AGE
+        mysecret Opaque 2 6m48s
 
         kubectl get secret mysecret -o yaml
 
