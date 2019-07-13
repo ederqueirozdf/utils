@@ -14,22 +14,22 @@
 
 ## Configurando o containers no deployment
 
-containers:
- - name: envtest
-   image: node.js
-   ports:
-   - containerPort: 3000
-   env:
-   - name: LANGUAGE
-     valueFrom:
-       configMapKeyRef:
-       name: language
-       key: LANGUAGE
-   - name: API_KEY
-     valueFrom:
-       secretKeyRef:
-         name: apikey
-         key: API_KEY
+        containers:
+         - name: envtest
+           image: node.js
+           ports:
+           - containerPort: 3000
+           env:
+           - name: LANGUAGE
+             valueFrom:
+               configMapKeyRef:
+               name: language
+               key: LANGUAGE
+           - name: API_KEY
+             valueFrom:
+               secretKeyRef:
+                 name: apikey
+                 key: API_KEY
 
 
 ## Substituição de Secrets e Configmaps
