@@ -111,4 +111,4 @@ Depois que o JX é instalado, ele inicializa os Pods com os seguintes aplicativo
 Além da instalação do Pod, o JX cria ambientes de "preparação" e "produção" que contêm versões de aplicativos em desenvolvimento. Essas configurações de ambientes são enviadas para repositórios remotos do Git e o webhook é criado para vincular à instalação do Jenkins no k8s.
 
 
-Fonte: <a href="https://blog.octo.com/en/jenkinsx-new-kubernetes-dream-part-1/">Tradução Blog Octo</a>
+Fonte: Tradução | Blog Octo - JenkinsX Kubernetes</a>

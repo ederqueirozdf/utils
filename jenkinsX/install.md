@@ -16,12 +16,7 @@
 
 	jx create cluster minikube
 
+### Atualização ingress cluster jx
 
-- Opcoes selecionadas
-
-	? memory (MB) 2048
-	? cpu (cores) 1
-	? disk-size (MB) 20GB
-	? kvm
-
+	jx upgrade ingress --cluster
 
