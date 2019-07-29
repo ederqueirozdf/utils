@@ -7,8 +7,8 @@
 
 ### Cabeçalho - HeaderForwarded
 
-X-Real-IP tcl:[IP::client_addr]
-X-Forwarded-For tcl:[IP::client_addr]
-X-Forwarded-Proto https
-X-Forwarded-Server tcl:[getfield [HTTP::host] : 1]
-X-Forwarded-Host tcl:[HTTP::host]
+  X-Real-IP tcl:[IP::client_addr]
+  X-Forwarded-For tcl:[IP::client_addr]
+  X-Forwarded-Proto https
+  X-Forwarded-Server tcl:[getfield [HTTP::host] : 1]
+  X-Forwarded-Host tcl:[HTTP::host]
