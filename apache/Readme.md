@@ -29,3 +29,23 @@ Abaixo exemplo de bloqueio de acesso as extensões ".map" no workdir da aplicaç
 
                 </Directory>
         </VirtualHost>
+        
+# Vhost Apache
+
+
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@dominio.com.br
+        DocumentRoot /dados/dominio
+        ServerName dominio.com.br
+        CustomLog /dados/log/dominio.access.log combined
+        ErrorLog /dados/log/dominio.error.log
+        LogLevel warn
+        <Directory /dados/dominio/>
+                Options -Indexes
+                AllowOverride all
+                Require all granted
+
+        </Directory>
+
+</VirtualHost>
