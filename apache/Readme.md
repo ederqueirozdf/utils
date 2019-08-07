@@ -33,7 +33,7 @@ Abaixo exemplo de bloqueio de acesso as extensões ".map" no workdir da aplicaç
 # Vhost Apache
 
 
-<VirtualHost *:80>
+    <VirtualHost *:80>
 
         ServerAdmin webmaster@dominio.com.br
         DocumentRoot /dados/dominio
