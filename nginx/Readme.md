@@ -1,6 +1,7 @@
 # Nginx
 
-Configurações para balanceamento nginx com certificado ssl habilitado.
+- Configurações para balanceamento nginx com certificado ssl habilitado.
+- SSL OffLoading Nginx to Webservice apache hosts com aplicação sei
 
 ~ nginx version: nginx/1.15.8 ~
 
