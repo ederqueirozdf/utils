@@ -59,7 +59,7 @@ Configurações para balanceamento nginx com certificado ssl habilitado.
                     proxy_connect_timeout   3;
                     proxy_pass              http://homolog-sei;
                     }
- }
+     }
 
 
 
