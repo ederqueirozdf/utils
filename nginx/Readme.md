@@ -1,3 +1,9 @@
+# Nginx
+
+Configurações para balanceamento nginx com certificado ssl habilitado.
+
+~ nginx version: nginx/1.15.8 ~
+
 # Upstream (Balanceamento NGINX)
 
     upstream homolog-sei {
