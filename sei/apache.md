@@ -1,7 +1,7 @@
 # Instalação Apache - CENTOS7
 
-  yum install httpd -y
-  yum install memcached
+    yum install httpd -y
+    yum install memcached
 
   
  # httpd.conf
