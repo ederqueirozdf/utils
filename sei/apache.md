@@ -53,9 +53,9 @@ Discovery” (gerados quando o Microsoft Office varre links que foram inseridos 
 
 - etc/sysconfig/memcached
 
-      PORT="11211"
-      USER="memcached"
-      MAXCONN="4096"
-      CACHESIZE="2048"
-      OPTIONS=""
+    PORT="11211"
+    USER="memcached"
+    MAXCONN="4096"
+    CACHESIZE="2048"
+    OPTIONS=""
 
