@@ -2,7 +2,7 @@
 
     upstream homolog-sei {
             ip_hash;
-    #        server 10.1.0.133;
+            server 10.1.0.133;
             server 10.1.0.130;
             keepalive 32;
         }
