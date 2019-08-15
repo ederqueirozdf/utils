@@ -1,6 +1,6 @@
 # Upstream SEI NGINX
 
-    upstream homolog-sei {
+    upstream homolog-sei.com.br {
             ip_hash;
             server 10.1.0.133;
             server 10.1.0.130;
@@ -10,7 +10,7 @@
         server {
             listen 80;
             listen [::]:80;
-            server_name homolog-sei.mma.gov.br;
+            server_name homolog-sei.com.br;
 
     #file-size
 
@@ -37,7 +37,7 @@
 
                     proxy_next_upstream     error timeout invalid_header http_500;
                     proxy_connect_timeout   3;
-                    proxy_pass              http://homolog-sei;
+                    proxy_pass              http://homolog-sei.com.br;
                    proxy_set_header           X-Real-IP   $remote_addr;
                    proxy_set_header           X-Forwarded-For  \$proxy_add_x_forwarded_for;
                    proxy_set_header           X-Forwarded-Proto  $scheme;
