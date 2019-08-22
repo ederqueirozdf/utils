@@ -22,20 +22,38 @@ EMAIL=abuse@mma.gov.br
 LOG=/var/log/httpd/
 
 CRIALVM(){
+echo ""
+	echo "---------------------------------------------------------------------------------------"
+	echo "ESTE SCRIPT FOI CONFIGURADO PARA CRIAÇÃO DE INSTÂNCIAS WORDPRESS OU JOOMLA."
+	echo "ESTE SERVIDOR POSSUI CONFIGURAÇÃO DE LVM PARA CADA WORKDIR DE CADA APLICAÇÃO EM CMS."
+	echo "ESTE SCRIPT IRÁ REALIZADAS AS SEGUINTES CONFIGURAÇÕES:"
+echo ""
+	echo "1. CRIAÇÃO DE VOLUME LÓGICO SOBRE O GRUPO DE VOLUMES JÁ ENTREGUE (vol)"
+	echo "2. FORMATAÇÃO DO VOLUME CRIADO EM XFS"
+	echo "3. MONTAGEM NO ARQUIVO DE PARTIÇÕES LINUX (fstab)"
+	echo "4. DOWNLOAD DA ÚLTIMA VERSÃO DO CMS JOOMLA ou WORDPRESS"
+	echo "5. DESCOMPACTAÇÃO DO CMS NO WORKDIR DA APLICAÇÃO"
+	echo "6. CONFIGURAÇÃO DO VHOST APACHE (homolog-nome.mma.gov.br)"
+	echo "7. REINICIALIZAÇÃO DOS SERVIÇOS APACHE"
+	echo "-----------------------------------------------------------------------------------------"
+echo ""
+	echo "** ATENÇÃO: ** Geralmente o nome do volume reflete o nome da aplicação"
+	echo "** EXEMPLO: ** Requisição para homolog-conama.mma.gov.br o nome do volume deverá ser conama "
+echo ""
+
 ### Verifica espaço disponível LVM
 	echo "-----------------"
 	echo "VERIFICA ESPAÇO DISPONÍVEL EM LVM"
 	echo "-----------------"
+echo ""
 	echo "ESPAÇO DISPONÍVEL EM $DATA:"
    	  vgdisplay  | grep Free | awk -F "<" {'print $2'}
-
 echo ""
 	echo "-----------------"
 	echo "CRIA VOLUME LÓGICO"
 	echo "-----------------"
+echo ""
 	echo "INFORME O NOME DO VOLUME A SER CRIADO:"
-	echo "** ATENÇÃO: ** Geralmente o nome do volume reflete o nome da aplicação"
-	echo "** EXEMPLO: ** Requisição para homolog-conama.mma.gov.br o nome do volume deverá ser "conama" "
 	read NOMEVOL
 echo ""
 	echo "--------------------------"
