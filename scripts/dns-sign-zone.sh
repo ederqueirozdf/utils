@@ -1,4 +1,7 @@
 #!/bin/bash
+# Script para criação de zona DNS
+# Nov. 2017, Eder Queiroz
+# Readme: Script para criação de chaves de zona de DNS e configuração de ZONA com DNSSEC. Validade de chaves para assinatura de zonas configuradas para 03 meses.
 
 if [ -z "$1" ]
 then
