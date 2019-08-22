@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Version: 1.0
+# Date of create: 22/08/2019
+# Create by: Eder Queiroz
+# Description: 
 # Script de deploy para novas aplicações em homologação WEBSIS
 # Wordpress ou Joomla
 # Para cada aplicação é configurado um volume específico em LVM
