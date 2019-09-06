@@ -10,43 +10,23 @@
 ## VARIAVEIS GLOBAIS ##
 #######################
 
-
 SELINUX=/etc/selinux/config
-#REPOPERCONA=https://repo.percona.com/yum/percona-release-latest.noarch.rpm
-
-#PERCONA56
-#https://www.percona.com/downloads/Percona-XtraDB-Cluster-56/LATEST/
-
 REPOPERCONA=https://www.percona.com/downloads/Percona-XtraDB-Cluster-56/Percona-XtraDB-Cluster-5.6.44-28.34/binary/redhat/7/x86_64/$REPOVERSION
 REPOVERSION=Percona-XtraDB-Cluster-server-56-5.6.44-28.34.1.el7.x86_64.rpm
 PERC56=https://www.percona.com/downloads/Percona-XtraDB-Cluster-56/Percona-XtraDB-Cluster-5.6.44-28.34/binary/redhat/7/x86_64/
 PERCVERSION=Percona-XtraDB-Cluster-5.6.44-28.34-r104-el7-x86_64-bundle.tar
-
 MYCNF=/etc/my.cnf
 DATA=`date +%d-%m-%Y-%H:%M:%S`
 UMYSQL=sstuser
 PWDMYSQL=P3rC0N4BacK4p
 PASSSSH=/usr/bin/sshpass
-
 COPY=/usr/bin/ssh-copy-id
-
-SCRIPTNODE2=install-percona2.sh
-SCRIPTNODE3=install-percona3.sh
 
 
 #######################
 ### FIM VARIAVEIS #####
 #######################
 
-#######################
-#######################
-#######################
-
-
-#
-#Configure SELINUX
-#
-#The SELinux security module can constrain access to data for Percona XtraDB Cluster. The best solution is to change the mode from enforcing to permissive by running the following command:
 
 HOSTS(){
 echo ""
