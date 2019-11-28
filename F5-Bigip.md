@@ -16,4 +16,4 @@
 
 ### Replace URI $path Policy
 
-tcl:[string map {"/path1/" "/"} [HTTP::uri]]
+    tcl:[string map {"/path1/" "/"} [HTTP::uri]]
