@@ -12,3 +12,8 @@
     X-Forwarded-Proto https
     X-Forwarded-Server tcl:[getfield [HTTP::host] : 1]
     X-Forwarded-Host tcl:[HTTP::host]
+
+
+### Replace URI $path Policy
+
+tcl:[string map {"/path1/" "/"} [HTTP::uri]]
