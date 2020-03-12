@@ -29,10 +29,15 @@
 
          pipeline {
           environment {
+              registry = "nexusregistry"
               dockerRegistry = "http://172.18.0.7:5001"
-              ImageName = "example"
-              ImageTag= "01"
+              registryCredential = 'admin'   
+              ImageName = "${env.JOB_NAME}"
+              ImageTag= "${env.BUILD_NUMBER}"
               dockerImage = ''
+              gitRepositoryUrl = "https://github.com/ederbritodf/example.git"
+              gitCredential = "ederbritodf"
+              gitBranch = "master"
           }
 
         agent any
@@ -57,7 +62,7 @@
               }
               stage('Clean Workspace') {
                 steps{
-                 sh "docker rmi -f 172.18.0.7:5001/$ImageName:$ImageTag"
+                 sh "docker rmi -f $registry/$ImageName:$ImageTag"
                 }
               }
             }
