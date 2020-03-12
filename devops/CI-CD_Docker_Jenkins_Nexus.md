@@ -23,6 +23,46 @@
 
     docker run -u root -d -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
     
+### Pipeline script from SCM
+
+- Jenkinsfile (Example)
+
+         pipeline {
+          environment {
+              dockerRegistry = "http://172.18.0.7:5001"
+              ImageName = "example"
+              ImageTag= "01"
+              dockerImage = ''
+          }
+
+        agent any
+
+        stages { 
+              stage('Build Image') {
+                steps{
+                  script {
+                    dockerImage = docker.build registry + "/$ImageName:$ImageTag"
+                  }
+                }
+              }
+              stage('Deploy Image Registry') {
+                steps{
+                  script {
+                      docker.withRegistry('http://172.18.0.7:5001' , 'docker-registry' ) {
+                          docker.build(ImageName)
+                              .push(ImageTag)
+                    }
+                  }
+                }
+              }
+              stage('Clean Workspace') {
+                steps{
+                 sh "docker rmi -f 172.18.0.7:5001/$ImageName:$ImageTag"
+                }
+              }
+            }
+          }
+    
 # Nexus
 
 ### Instalação Ubuntu/Mint
