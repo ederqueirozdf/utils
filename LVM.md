@@ -1,5 +1,12 @@
-# LVM
+<h1 align="center">LVM 👋</h1>
 
+## Author
+👤 **Eder Queiroz**
+* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+
+## 🤝 Contribuições são bem vindas
+Linux ❤️
+<hr>
 ## Criar Volumes
 
 #### 1. Procedimento
