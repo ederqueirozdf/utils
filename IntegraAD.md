@@ -1,4 +1,12 @@
-### Integração Active Directory - REALMD
+<h1 align="center"> Integração Active Directory - REALMD 👋</h1>
+
+## Author
+👤 **Eder Queiroz**
+* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+
+## 🤝 Contribuições são bem vindas
+Linux ❤️
+<hr>
 
 A integração dos servidores Linux com o Active Directory será realizada com o REALMD. Este pacote configura os serviços subjacentes do sistema Linux, como SSSD ou Winbind, para se conectar ao domínio.
 
