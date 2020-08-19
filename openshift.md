@@ -20,7 +20,7 @@
             disable: true                                                                                                   
             kind: DefaultAdmissionConfig
 
-**Após alteração do arquivo de configuração dos nodes masters, reiniciar os serviços: **
+**Após alteração do arquivo de configuração dos nodes masters, reiniciar os serviços:**
 
     # master-restart controllers
     # master-restart api
