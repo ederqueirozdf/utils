@@ -1,9 +1,9 @@
-<h1 align="center">Dia a Dia em Sustentação de Infraestrutura de TI  👋</h1>
+<h1 align="center"> Dia a Dia Infraestrutura 🐧 </h1>
 
-## Author
-👤 **Eder Queiroz**
-* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+- Repositório com utilidades do dia-a-dia em sustentação de infraestrutura de TI.
 
-## 🤝 Contribuições são bem vindas
-Linux ❤️
+#### 👤 Por: **Eder Queiroz**
+ - 🐱 Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+ - 🤙 Telegram: [@ederqueirozdf](https://t.me/ederqueirozdf)
+ - Linux ❤️
 <hr>
