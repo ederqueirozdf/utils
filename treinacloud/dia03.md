@@ -68,15 +68,15 @@ FIREBASE
             run: cd build && AWS_ACCESS_KEY_ID=${ACCESS_KEY} AWS_SECRET_ACCESS_KEY=${SECRET_KEY} aws s3 sync . s3://treinazap --acl public-read --delete
           - name: CLEAR CACHE
             run: AWS_ACCESS_KEY_ID=${ACCESS_KEY} AWS_SECRET_ACCESS_KEY=${SECRET_KEY} aws cloudfront create-invalidation --distribution-id E91FKLAV95EGI --path '/*'
-    ​
+    
 
 Action file SonarQube - FINAL
 
     name: Deploy Treinazap - S3
-    ​
+    
     on:
       workflow_dispatch:
-    ​
+    
     jobs:
       build:
         runs-on: ubuntu-18.04
@@ -87,7 +87,7 @@ Action file SonarQube - FINAL
             run: doppler secrets download --no-file --format=docker >> $GITHUB_ENV; 
             env:
                DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN_PRD }}
-    ​
+    
 
           - uses: actions/setup-node@v1
             with:
@@ -108,30 +108,29 @@ Action file SonarQube - FINAL
             run: cd build && AWS_ACCESS_KEY_ID=${ACCESS_KEY} AWS_SECRET_ACCESS_KEY=${SECRET_KEY} aws s3 sync . s3://treinazap --acl public-read --delete
           - name: CLEAR CACHE
             run: AWS_ACCESS_KEY_ID=${ACCESS_KEY} AWS_SECRET_ACCESS_KEY=${SECRET_KEY} aws cloudfront create-invalidation --distribution-id E91FKLAV95EGI --path '/*'
-    ​
 
-​
+
 Adicionando SWAP
 
-  sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048
-  sudo /sbin/mkswap /var/swap.1
-  sudo chmod 600 /var/swap.1
-  /sbin/swapon /var/swap.1
-  sudo echo "/var/swap.1   none   swap  sw  0  0" | sudo tee -a /etc/fstab
+        sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048
+        sudo /sbin/mkswap /var/swap.1
+        sudo chmod 600 /var/swap.1
+        /sbin/swapon /var/swap.1
+        sudo echo "/var/swap.1   none   swap  sw  0  0" | sudo tee -a /etc/fstab
 
 Install Ambiente Docker
 
-  sudo bash
-  sudo amazon-linux-extras install docker
-  sudo service docker start
-  sudo systemctl enable docker
-  sudo usermod -a -G docker ec2-user
-  sudo docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
-  ​
+        sudo bash
+        sudo amazon-linux-extras install docker
+        sudo service docker start
+        sudo systemctl enable docker
+        sudo usermod -a -G docker ec2-user
+        sudo docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
+        ​
 
 CLEAR MEMORY
 
-  sync; echo 1 > /proc/sys/vm/drop_caches
-  sync; echo 2 > /proc/sys/vm/drop_caches
-  sync; echo 3 > /proc/sys/vm/drop_caches
+        sync; echo 1 > /proc/sys/vm/drop_caches
+        sync; echo 2 > /proc/sys/vm/drop_caches
+        sync; echo 3 > /proc/sys/vm/drop_caches
 
