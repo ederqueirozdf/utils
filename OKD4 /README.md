@@ -16,3 +16,8 @@ https://docs.okd.io/latest/openshift_images/samples-operator-alt-registry.html
 #### Configure Images Registry
 
 - https://docs.openshift.com/container-platform/4.7/openshift_images/image-configuration.html#images-configuration-allowed_image-configuration
+
+
+#### ImagePullSecret
+
+- https://docs.okd.io/latest/openshift_images/managing_images/using-image-pull-secrets.html
