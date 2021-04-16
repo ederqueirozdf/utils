@@ -1,6 +1,8 @@
 # Links uteis:
 
 
+#### Mirror Images
+https://docs.okd.io/latest/openshift_images/samples-operator-alt-registry.html
 
 #### Registry
 - https://docs.openshift.com/container-platform/4.7/registry/configuring_registry_storage/configuring-registry-storage-vsphere.html#registry-configuring-storage-vsphere_configuring-registry-storage-vsphere
