@@ -1,5 +1,8 @@
 # Links uteis:
 
+
+
+#### Registry
 - https://docs.openshift.com/container-platform/4.7/registry/configuring_registry_storage/configuring-registry-storage-vsphere.html#registry-configuring-storage-vsphere_configuring-registry-storage-vsphere
 
 
