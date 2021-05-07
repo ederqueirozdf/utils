@@ -76,6 +76,10 @@ plugins=(
 	dnf
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	helm
+	oc
+	kubectl
+	python
 
 )
 
@@ -106,3 +110,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias k=kubectl
