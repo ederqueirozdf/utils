@@ -1,4 +1,4 @@
-## Repositório de customização de tema e plugins utilizados no terminal zsh
+## Customização ZSH - Temas e Plugins utilizados
 
 ### Instalação ohmyzsh
 
