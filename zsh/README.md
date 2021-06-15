@@ -1,4 +1,4 @@
-# Repositório de customização de tema e plugins utilizados no terminal zsh
+## Repositório de customização de tema e plugins utilizados no terminal zsh
 
 ### Instalação ohmyzsh
 
@@ -9,3 +9,7 @@
 Alterar no arquivo .zshrc com o nome de usuário do PC:
 
     export ZSH="/home/"usuario"/.oh-my-zsh"
+
+### Plugins e Temas
+
+- https://github.com/ohmyzsh/ohmyzsh
