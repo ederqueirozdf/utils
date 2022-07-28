@@ -1,0 +1,63 @@
+# This ConfigMap is used to configure a self-hosted Calico installation.
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: calico-config
+  namespace: kube-system
+data:
+{{- if .Values.typha.enabled }}
+  # You must set a non-zero value for Typha replicas below.
+  typha_service_name: "calico-typha"
+{{- else }}
+  # Typha is disabled.
+  typha_service_name: "none"
+{{- end }}
+
+  # Configure the backend to use.
+  calico_backend: {{ .Values.calicoConfig.backend | quote }}
+
+  # Configure the MTU to use for workload interfaces and the
+  # tunnels.  For IPIP, set to your network MTU - 20; for VXLAN
+  # set to your network MTU - 50.
+  veth_mtu: {{ .Values.calicoConfig.mtu | quote }}
+
+  # The CNI network configuration to install on each node.  The special
+  # values in this config will be automatically populated.
+  cni_network_config: |-
+    {
+      "name": "k8s-pod-network",
+      "cniVersion": "0.3.1",
+      "plugins": [
+        {
+          "type": "calico",
+          "log_level": {{ default "info" .Values.calicoConfig.loglevel | quote }},
+          "datastore_type": "kubernetes",
+          "nodename": "__KUBERNETES_NODE_NAME__",
+          "mtu": __CNI_MTU__,
+          "ipam": {
+            "type": "calico-ipam",
+            "assign_ipv4" : "true",
+            "assign_ipv6" : "true"
+          },
+          "policy": {
+              "type": "k8s"
+          },
+          "kubernetes": {
+              {{- if .Values.calicoConfig.kubeconfig }}
+              "kubeconfig": {{ .Values.calicoConfig.kubeconfig | quote }}
+              {{- else }}
+              "kubeconfig": "__KUBECONFIG_FILEPATH__"
+              {{- end }}
+          }
+        },
+        {
+          "type": "portmap",
+          "snat": true,
+          "capabilities": {"portMappings": true}
+        },
+        {
+          "type": "bandwidth",
+          "capabilities": {"bandwidth": true}
+        }
+      ]
+    }

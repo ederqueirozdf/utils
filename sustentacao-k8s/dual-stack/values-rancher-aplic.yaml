@@ -1,0 +1,217 @@
+rancher-aplic:
+  clusterRoleBindings:
+    enabled: true
+    binds:
+    - name: pscsp004
+      roleTemplateName: rt-pscsp004
+      groupPrincipalName: keycloak_group://pscsp004
+    - name: pscsp003
+      roleTemplateName: rt-pscsp003
+      groupPrincipalName: keycloak_group://pscsp003
+    - name: devkub01
+      roleTemplateName: rt-devkub01-cr
+      groupPrincipalName: keycloak_group://devkub01
+    - name: pscsp003-adm
+      roleTemplateName: cluster-owner
+      groupPrincipalName: keycloak_group://pscsp003
+    - name: pscsp002
+      roleTemplateName: cluster-owner
+      groupPrincipalName: keycloak_group://pscsp002
+    # - name: psc001
+    #   roleTemplateName: rt-psc001-cr
+    #   groupPrincipalName: keycloak_group://psc001
+    # - name: psc002
+    #   roleTemplateName: rt-psc002-cr
+    #   groupPrincipalName: keycloak_group://psc002
+    # - name: almfdpsc
+    #   roleTemplateName: rt-psc001-cr
+    #   groupPrincipalName: keycloak_group://almfdpsc
+    # - name: almfdpsc-adm
+    #   roleTemplateName: rt-psc002-cr
+    #   groupPrincipalName: keycloak_group://almfdpsc
+  
+  cluster:
+    enabled: true
+    # Prefixo do cluster
+    prefixo: kdr
+    # Configurações do Cluster conforme padrão Rancher/RKE Config
+    config:
+      displayName: k8s-staging-dr
+      description: Cluster para staging disaster recovery.
+      dockerRootDir: /var/lib/docker
+      localClusterAuthEndpoint:
+        enabled: true
+      rancherKubernetesEngineConfig:
+        addonJobTimeout: 90
+        authentication:
+          sans:
+          - kube-api.stgdr.nuvem.bb.com.br
+          strategy: x509|webhook
+        authorization:
+          mode: rbac
+        bastionHost: {}
+        cloudProvider: {}
+        # dns:
+        #   linearAutoscalerParams:
+        #     coresPerReplica: 64
+        #     max: 20
+        #     min: 3
+        #     nodesPerReplica: 4
+        #     preventSinglePointFailure: true
+        #   #nodeSelector: null
+        #   nodelocal:
+        #     ipAddress: 169.254.20.10
+        #     #nodeSelector: null
+        #     updateStrategy:
+        #       rollingUpdate:
+        #         maxUnavailable: 1
+        #       strategy: RollingUpdate
+        #   provider: coredns
+        #   #reversecidrs: null
+        #   #stubdomains: null
+        #   updateStrategy:
+        #     rollingUpdate: 
+        #       maxSurge: 2
+        #       maxUnavailable: 1
+        #     strategy: RollingUpdate
+        #   #upstreamnameservers: null
+        ignoreDockerVersion: true
+        ingress:
+          provider: none
+        kubernetesVersion: v1.18.16-rancher1-1
+        monitoring:
+          provider: metrics-server
+          # replicas: 1
+          # updateStrategy:
+          #   rollingUpdate:
+          #     maxSurge: 1
+          #     maxUnavailable: 0
+          #   strategy: RollingUpdate
+        network:
+          plugin: none
+        privateRegistries:
+        - isDefault: true
+          url: atf.intranet.bb.com.br:5001
+        restore: {}
+        services:
+          etcd:
+            backupConfig:
+              enabled: true
+              intervalHours: 12
+              retention: 6
+            #  s3BackupConfig: 
+            #    accessKey: 
+            #    secretKey:
+            #    bucketName: rancher-backups
+            #    endpoint: medley.nuvem.bb.com.br:8080
+            #    folder: k8s-rancher
+            #    region: medley  
+            #  safeTimestamp: false
+            creation: 12h
+            extraArgs:
+              election-timeout: "5000"
+              heartbeat-interval: "500"
+            #gid: 0
+            retention: 72h
+            snapshot: false
+            #uid: 0
+          kubeApi:
+            #alwaysPullImages: false
+            # auditLog:
+            #   configuration:
+            #     format: json
+            #     maxAge: 20
+            #     maxBackup: 25
+            #     maxSize: 200
+            #     path: /var/log/kube-audit/audit-log.json
+            #     policy:
+            #       apiVersion: audit.k8s.io/v1
+            #       kind: Policy
+            #       metadata: {}
+            #       rules:
+            #       - level: Metadata
+            #         omitStages:
+            #         - RequestReceived
+            #   enabled: true
+            # eventRateLimit:
+            #   enabled: true
+            extraArgs:
+              service-cluster-ip-range: "3.3.0.0/16,2001:0:0:3::/112"
+              feature-gates: "IPv6DualStack=true"
+              v: "2"
+            #podSecurityPolicy: false
+            serviceClusterIpRange: "3.3.0.0/16"
+            serviceNodePortRange: 30000-32767
+          kubeController:
+            clusterCidr: "3.2.0.0/16,2001:0:0:2::/104"
+            extraArgs:
+              cluster-signing-cert-file: /etc/kubernetes/ssl/kube-ca.pem
+              cluster-signing-key-file: /etc/kubernetes/ssl/kube-ca-key.pem
+              v: "2"
+              feature-gates: "IPv6DualStack=true"
+              service-cluster-ip-range: "3.3.0.0/16,2001:0:0:3::/112"
+              bind-address: "::"
+              node-cidr-mask-size-ipv4: "16"
+              node-cidr-mask-size-ipv6: "112"
+              allocate-node-cidrs: "true"
+          kubelet:
+            clusterDnsServer: 3.3.0.10
+            clusterDomain: cluster.local
+            extraArgs:
+              feature-gates: "IPv6DualStack=true"
+              enforce-node-allocatable: pods
+              eviction-hard: memory.available<2Gi,nodefs.available<10%,imagefs.available<10%,nodefs.inodesFree<5%
+              eviction-max-pod-grace-period: "30"
+              eviction-minimum-reclaim: memory.available=256Mi,nodefs.available=30Mi,imagefs.available=100Mi
+              eviction-pressure-transition-period: 30s
+              eviction-soft: memory.available<3.5Gi,nodefs.available<15%,imagefs.available<15%,nodefs.inodesFree<8%
+              eviction-soft-grace-period: memory.available=1m,nodefs.available=1m,imagefs.available=1m,nodefs.inodesFree=1m
+              kube-reserved: cpu=1000m
+              kube-reserved-cgroup: /docker
+              max-pods: "100"
+              system-reserved: cpu=1000m
+              system-reserved-cgroup: /system.slice
+              v: "2"
+            #failSwapOn: false
+            #generateServingCertificate: false
+          kubeproxy:
+            clusterCidr: "3.2.0.0/16,2001:0:0:2::/104"
+            extraArgs:
+              bind-address: "::"
+              feature-gates: "IPv6DualStack=true"       
+              proxy-mode: "ipvs"
+              ipvs-scheduler: "rr"
+              # ipvs-tcp-timeout: "0"
+              # ipvs-tcpfin-timeout: "0"
+              # ipvs-udp-timeout: "0"
+              v: "2"
+          scheduler:
+            extraArgs:
+              v: "2"
+        sshAgentAuth: false
+        # upgradeStrategy:
+        #   #drain: false
+        #   maxUnavailableControlplane: "1"
+        #   maxUnavailableWorker: 10%
+        #   nodeDrainInput:
+        #   #  deleteLocalData: false
+        #   #  force: false
+        #     gracePeriod: -1
+        #     ignoreDaemonSets: true
+        #     timeout: 120
+        #addons: |
+      # Extra configs      
+      enableClusterAlerting: false
+      enableClusterMonitoring: false
+      enableNetworkPolicy: false
+      #scheduledClusterScan:
+      #  enabled: false
+      #  scanConfig: null
+      #  scheduleConfig: null
+      #windowsPreferedCluster: false
+      #clusterTemplateRevisionName: null
+      #defaultClusterRoleForProjectMembers: null
+      #defaultPodSecurityPolicyTemplateName: null
+      #desiredAgentImage: ""
+      #desiredAuthImage: ""
+      #internal: false

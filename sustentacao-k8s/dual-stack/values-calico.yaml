@@ -1,0 +1,104 @@
+global:
+  registry: atf.intranet.bb.com.br:5001 # Default registry for all images
+  tag: "v3.14.0" # Default tag for all images
+
+# Configurations for calico-config 
+calicoConfig:
+  # Configure the MTU to use for workload interfaces and the
+  # tunnels.  For IPIP, set to your network MTU - 20; for VXLAN
+  # set to your network MTU - 50.
+  mtu: "1450"
+  # Set to vxlan if CALICO_IPV4POOL_VXLAN is set to Always. Default: bird
+  backend: "vxlan"
+  loglevel: "info"
+  # Configure kubeconfig if not using calico default. Ex: Rancher uses nginx-proxy - /etc/kubernetes/ssl/kubecfg-kube-node.yaml
+  kubeconfig: "/etc/kubernetes/ssl/kubecfg-kube-node.yaml"
+
+calicoNode:
+  image: "calico/node"
+  cniImage: "calico/cni"
+  flexVolImage: "calico/pod2daemon-flexvol"
+
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
+  # defines CALICO_IPV4POOL_IPIP or CALICO_IPV4POOL_VXLAN env vars
+  encapsulation:
+    type: "VXLAN"         # IPIP or VXLAN
+    mode: "CrossSubnet"  # Always, CrossSubnet
+
+  # defines FELIX_PROMETHEUSMETRICSENABLED and FELIX_PROMETHEUSMETRICSPORT env vars
+  # also creates a service felix-metrics-svc to expose felix endpoints
+  metrics:
+    enabled: true
+    port: "9091"
+  
+  resources: 
+  #  limits:
+  #    cpu: 500m
+  #    memory: 512Mi
+  #  requests:
+  #    cpu: 250m
+  #    memory: 256Mi
+
+  # Pre-defined environment vars
+  env:
+    CLUSTER_TYPE: "k8s,bgp"                      # Cluster type to identify the deployment type
+    IP: "autodetect"                             # Auto-detect the BGP IP address.
+    IP6: "autodetect"                            # Auto-detect the BGP IP address.
+    CALICO_IPV4POOL_CIDR: "3.2.0.0/16"           # The default IPv4 pool to create on startup if none exists
+    CALICO_IPV6POOL_CIDR: "2001:0:0:2::/104"      # IPv6 pool to create on startup if none exists
+    CALICO_DISABLE_FILE_LOGG/ING: "true"          # Disable file logging so `kubectl logs` works.
+    FELIX_DEFAULTENDPOINTTOHOSTACTION: "ACCEPT"  # Set Felix endpoint to host default action to ACCEPT.
+    FELIX_IPV6SUPPORT: "true"                    # Enable/disable IPv6 on Kubernetes.
+    FELIX_LOGSEVERITYSCREEN: "info"              # Set Felix logging
+    FELIX_HEALTHENABLED: "true"                  # Exposes felix health information via an http endpoint.
+  # Set extra env vars not defined before
+  extraEnv:
+    FELIX_USAGEREPORTINGENABLED: "false"
+    CALICO_IPV4POOL_NAT_OUTGOING: "true"
+    CALICO_IPV6POOL_NAT_OUTGOING: "true"
+    FELIX_IGNORELOOSERPF: "false"
+    CALICO_IPV4POOL_BLOCK_SIZE: "26" # block size IPv4 for nodes
+
+kubeControllers:
+  image: "calico/kube-controllers"
+  tolerations: 
+  # Adicionadas para garantir a subida em todos os nodes do Rancher
+  - effect: NoSchedule
+    operator: Exists
+  - effect: NoExecute
+    operator: Exists
+  resources: 
+  #  limits:
+  #    cpu: 500m
+  #    memory: 512Mi
+  #  requests:
+  #    cpu: 250m
+  #    memory: 256Mi
+
+# We recommend using Typha if you have more than 50 nodes.  Above 100 nodes it is essential
+# (when using the Kubernetes datastore).  Use one replica for every 100-200 nodes.  In
+# production, we recommend running at least 3 replicas to reduce the impact of rolling upgrade.
+typha:
+  enabled: false
+  image: "calico/typha"
+  replicas: 3 
+  # Set this to enable prometheus metrics.  Since Typha is host-networked,
+  # this opens a port on the host, which may need to be secured.
+  metrics: 
+    enabled: true
+    port: "9093"
+  loglevel: "info"
+  # Set extra env vars 
+  resources: 
+  #  limits:
+  #    cpu: 500m
+  #    memory: 512Mi
+  #  requests:
+  #    cpu: 250m
+  #    memory: 256Mi
+  extraEnv:
+    TYPHA_MAXCONNECTIONSLOWERLIMIT: "300"
